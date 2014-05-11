@@ -5,6 +5,9 @@
   "icons": {
     "16": "/img/logo-16.png",
     "48": "/img/logo-48.png",
+    "60": "/img/logo-60.png",
+    "90": "/img/logo-90.png",
+    "120": "/img/logo-120.png",
     "128": "/img/logo-128.png"
   },
   "developer": {
