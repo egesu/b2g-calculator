@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" ng-app="superApp">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimum-scale=1">
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+
+    <body ng-controller="SuperCtrl">
+
+        <div class="main">
+            <div class="display-container">
+                <div class="display" ng-bind="display"></div>
+            </div>
+
+            <div class="buttons portrait">
+                <div ng-click="removeAll($event)">C</div>
+                <div ng-click="buttonPressed($event, '')"></div>
+                <div></div>
+                <div ng-click="backslash()">&lt;-</div>
+                <div ng-click="buttonPressed($event, 1)">1</div>
+                <div ng-click="buttonPressed($event, 2)">2</div>
+                <div ng-click="buttonPressed($event, 3)">3</div>
+                <div ng-click="buttonPressed($event, '+')">+</div>
+                <div ng-click="buttonPressed($event, 4)">4</div>
+                <div ng-click="buttonPressed($event, 5)">5</div>
+                <div ng-click="buttonPressed($event, 6)">6</div>
+                <div ng-click="buttonPressed($event, '-')">-</div>
+                <div ng-click="buttonPressed($event, 7)">7</div>
+                <div ng-click="buttonPressed($event, 8)">8</div>
+                <div ng-click="buttonPressed($event, 9)">9</div>
+                <div ng-click="buttonPressed($event, '*')">*</div>
+                <div ng-click="buttonPressed($event, 0)">0</div>
+                <div ng-click="buttonPressed($event, '.')">.</div>
+                <div ng-click="buttonPressed($event, '/')">/</div>
+                <div ng-click="process()">=</div>
+            </div>
+
+            <div class="buttons landscape">
+                <div ng-click="buttonPressed($event, 1)">1</div>
+                <div ng-click="buttonPressed($event, 2)">2</div>
+                <div ng-click="buttonPressed($event, 3)">3</div>
+                <div ng-click="backslash()">&lt;-</div>
+                <div ng-click="removeAll($event)">C</div>
+                <div ng-click="process()">=</div>
+                <div></div>
+                <div ng-click="buttonPressed($event, 4)">4</div>
+                <div ng-click="buttonPressed($event, 5)">5</div>
+                <div ng-click="buttonPressed($event, 6)">6</div>
+                <div ng-click="buttonPressed($event, '+')">+</div>
+                <div ng-click="buttonPressed($event, '-')">-</div>
+                <div ng-click="buttonPressed($event, '/')">/</div>
+                <div></div>
+                <div ng-click="buttonPressed($event, 7)">7</div>
+                <div ng-click="buttonPressed($event, 8)">8</div>
+                <div ng-click="buttonPressed($event, 9)">9</div>
+                <div ng-click="buttonPressed($event, 0)">0</div>
+                <div ng-click="buttonPressed($event, '*')">*</div>
+                <div ng-click="buttonPressed($event, '.')">.</div>
+                <div></div>
+            </div>
+        </div>
+
+        <footer>
+            <a ng-click="developerInfo = true">Developer Info</a>
+        </footer>
+
+        <div class="overlay" ng-class="{'active': developerInfo}" ng-click="developerInfo = false"></div>
+
+        <div class="developer-info" ng-show="developerInfo">
+            Sarı Kedi
+            <br>
+            <a href="http://sarikedi.com" target="_blank">http://sarikedi.com</a>
+            <br>
+            <br>
+            Ege Sertçetin
+            <br>
+            2014
+        </div>
+
+        <script type="text/javascript" src="js/libs/MathContext.js"></script>
+        <script type="text/javascript" src="js/libs/BigDecimal.js"></script>
+        <script type="text/javascript" src="js/libs/angular.min.js"></script>
+        <script type="text/javascript" src="js/libs/angular-touch.min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </body>
+</html>

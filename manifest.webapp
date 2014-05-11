@@ -1,0 +1,19 @@
+{
+  "name": "Calculator",
+  "description": "Just a simple calculator",
+  "launch_path": "/index.html",
+  "icons": {
+    "16": "/img/logo-16.png",
+    "48": "/img/logo-48.png",
+    "128": "/img/logo-128.png"
+  },
+  "developer": {
+    "name": "Sarı Kedi",
+    "url": "http://www.sarikedi.com"
+  },
+  "permissions": {
+    "desktop-notification": {
+      "description": "Needed for creating system notifications."
+    }
+  }
+}
