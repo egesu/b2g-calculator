@@ -10,10 +10,5 @@
   "developer": {
     "name": "Sarı Kedi",
     "url": "http://www.sarikedi.com"
-  },
-  "permissions": {
-    "desktop-notification": {
-      "description": "Needed for creating system notifications."
-    }
   }
 }
