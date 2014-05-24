@@ -23,19 +23,38 @@ app.controller('SuperCtrl', function SuperCtrl($scope, $http) {
         var characterArray = [];
 
         var currentNumber = '';
+        var toBeContinued = false;
+        var display = $scope.display.split('');
+        
+        for(var i in display) {
+            if(toBeContinued) {
+                toBeContinued = false;
+                continue;
+            }
+            i = parseInt(i);
+            if(display[i] === '-') {
+                if(i === 0 || isNaN(parseInt(display[i-1]))) {
+                    display[i] = (-1 * parseInt(display[i+1])) + '';
+                    display[i+1] = null;
+                    toBeContinued = true;
+                }
+            }
+        }
 
-        for(var i in $scope.display) {
-            if(['+', '-', '*', '/'].indexOf($scope.display[i]) === -1) {
-                currentNumber += $scope.display[i];
+        for(var i in display) {
+            if(display[i] === null) continue;
+            if(['+', '-', '*', '/'].indexOf(display[i]) === -1) {
+                currentNumber += display[i];
             } else {
                 characterArray.push(new BigDecimal(currentNumber));
-                characterArray.push($scope.display[i]);
+                characterArray.push(display[i]);
                 currentNumber = '';
             }
         }
 
         if(currentNumber) {
-            characterArray.push(new BigDecimal(currentNumber));
+            currentNumber = new BigDecimal(currentNumber);
+            characterArray.push(currentNumber);
         }
 
         while(characterArray.indexOf('*') !== -1 || characterArray.indexOf('/') !== -1) {
@@ -44,7 +63,7 @@ app.controller('SuperCtrl', function SuperCtrl($scope, $http) {
                 if(characterArray[i] === '*') {
                     characterArray[i - 1] = characterArray[i - 1].multiply(characterArray[i + 1]);
                 } else if(characterArray[i] === '/') {
-                    characterArray[i - 1] = characterArray[i - 1].divide(characterArray[i + 1]);
+                    characterArray[i - 1] = characterArray[i - 1].divide(characterArray[i + 1], 7, MathContext.ROUND_HALF_UP);
                 } else {
                     continue;
                 }
@@ -71,6 +90,8 @@ app.controller('SuperCtrl', function SuperCtrl($scope, $http) {
         for(var i in characterArray) {
             $scope.display += characterArray[i];
         }
+        
+        $scope.display = Number($scope.display) + '';
     };
 
 
