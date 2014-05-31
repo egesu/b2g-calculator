@@ -1,6 +1,6 @@
 var app = angular.module('superApp', ['ngTouch']);
 
-app.controller('SuperCtrl', function SuperCtrl($scope, $http) {
+app.controller('SuperCtrl', function SuperCtrl($scope, $http, $window) {
 
     $scope.display = '';
     $scope.developerInfo = false;
@@ -25,7 +25,7 @@ app.controller('SuperCtrl', function SuperCtrl($scope, $http) {
         var currentNumber = '';
         var toBeContinued = false;
         var display = $scope.display.split('');
-        
+
         for(var i in display) {
             if(toBeContinued) {
                 toBeContinued = false;
@@ -46,14 +46,29 @@ app.controller('SuperCtrl', function SuperCtrl($scope, $http) {
             if(['+', '-', '*', '/'].indexOf(display[i]) === -1) {
                 currentNumber += display[i];
             } else {
-                characterArray.push(new BigDecimal(currentNumber));
+                try {
+                    characterArray.push(new BigDecimal(currentNumber));
+                } catch(e) {
+                    if(e.indexOf('Not a number') !== -1) {
+                        $scope.showError();
+                    }
+                    return false;
+                }
                 characterArray.push(display[i]);
                 currentNumber = '';
             }
         }
 
         if(currentNumber) {
-            currentNumber = new BigDecimal(currentNumber);
+            try {
+                currentNumber = new BigDecimal(currentNumber);
+            } catch(e) {
+                if(e.indexOf('Not a number') !== -1) {
+                    $scope.showError();
+                }
+                return false;
+            }
+            characterArra
             characterArray.push(currentNumber);
         }
 
@@ -90,12 +105,17 @@ app.controller('SuperCtrl', function SuperCtrl($scope, $http) {
         for(var i in characterArray) {
             $scope.display += characterArray[i];
         }
-        
+
         $scope.display = Number($scope.display) + '';
     };
 
 
     $scope.removeAll = function() {
         $scope.display = '';
+    };
+
+
+    $scope.showError = function() {
+        $window.alert('Syntax error');
     };
 });
