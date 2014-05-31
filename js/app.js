@@ -68,7 +68,6 @@ app.controller('SuperCtrl', function SuperCtrl($scope, $http, $window) {
                 }
                 return false;
             }
-            characterArra
             characterArray.push(currentNumber);
         }
 
