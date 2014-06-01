@@ -77,7 +77,14 @@ app.controller('SuperCtrl', function SuperCtrl($scope, $http, $window) {
                 if(characterArray[i] === '*') {
                     characterArray[i - 1] = characterArray[i - 1].multiply(characterArray[i + 1]);
                 } else if(characterArray[i] === '/') {
-                    characterArray[i - 1] = characterArray[i - 1].divide(characterArray[i + 1], 7, MathContext.ROUND_HALF_UP);
+                    try {
+                        characterArray[i - 1] = characterArray[i - 1].divide(characterArray[i + 1], 7, MathContext.ROUND_HALF_UP);
+                    } catch(e) {
+                        if(e.indexOf('Divide by 0') !== -1) {
+                            $scope.showError('Division by zero');
+                        }
+                        return false;
+                    }
                 } else {
                     continue;
                 }
@@ -114,7 +121,7 @@ app.controller('SuperCtrl', function SuperCtrl($scope, $http, $window) {
     };
 
 
-    $scope.showError = function() {
-        $window.alert('Syntax error');
+    $scope.showError = function(message) {
+        $window.alert(message || 'Syntax error');
     };
 });
